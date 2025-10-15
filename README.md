@@ -2,6 +2,18 @@
 
 A simple C++ program that multiplies two matrices read from a text file, using `std::thread` to parallelize the computation. Each row of the resulting matrix is calculated on a separate thread.
 
+## Project Structure
+
+The input file (`matrizes.txt`) should be placed inside the `/output` directory, alongside the compiled executable.
+
+```
+project-root/
+├── output/
+│   ├── matrix_multi_threads  <-- Executable goes here
+│   └── matrizes.txt          <-- Input file goes here
+└── matrix_multi_threads.cpp
+```
+
 ## Getting Started
 
 Follow these instructions to compile and run the project on your local machine.
@@ -10,58 +22,46 @@ Follow these instructions to compile and run the project on your local machine.
 
 You will need a C++ compiler that supports C++11 or newer and POSIX threads (pthreads).
 
-- **For Windows:** [MinGW-w64](https://www.mingw-w64.org/) (GCC for Windows) is recommended.
-- **For Linux/macOS:** A modern version of GCC or Clang should work out of the box.
+* **For Windows:** [MinGW-w64](https://www.mingw-w64.org/) (GCC for Windows) is recommended.
+* **For Linux/macOS:** A modern version of GCC or Clang should work out of the box.
 
 ### Compilation
 
-Open your terminal, navigate to the project directory, and compile the source code using the following command. The `-pthread` flag is essential for enabling thread support.
+From the **project's root directory**, run the following command. It will compile the source file and place the executable inside the `/output` folder.
 
 ```bash
-g++ matrix_multi_threads.cpp -o matrix_multiplier -std=c++17 -pthread
+g++ matrix_multi_threads.cpp -o output/matrix_multi_threads -std=c++17 -pthread
 ```
 
 ### Execution
 
-Run the compiled program from the terminal:
+After compiling, you must first navigate into the `output` directory to run the program.
 
-```bash
-./matrix_multiplier
-```
+1.  **Change into the output directory:**
+    ```bash
+    cd output
+    ```
+2.  **Run the executable:**
+    ```bash
+    ./matrix_multi_threads
+    ```
 
-The program will then prompt you to enter the name of the input file.
-
-## Input File Format
-
-The program expects a single text file containing two matrices. The format for each matrix is as follows:
-
-1.  A line `L=` followed by the number of rows.
-2.  A line `C=` followed by the number of columns.
-3.  The matrix data, with numbers separated by spaces and each row on a new line.
-
-### Example (`input.txt`)
-
-This file contains a 2x3 matrix followed by a 3x2 matrix.
-
-```
-L=2
-C=3
-1 2 3
-4 5 6
-L=3
-C=2
-7 8
-9 10
-11 12
-```
+The program will then prompt you to enter the name of your input file (e.g., `matrizes.txt`).
 
 ## Example Usage
 
-This shows how to run the program and the expected output for the example file above.
+This shows the complete workflow in the terminal.
 
 ```bash
-$ ./matrix_multiplier
-Enter input filename: input.txt
+# From the project root, compile the code
+$ g++ matrix_multi_threads.cpp -o output/matrix_multi_threads -std=c++17 -pthread
+
+# Navigate into the output folder
+$ cd output
+
+# Run the program
+$ ./matrix_multi_threads
+Enter input filename: matrizes.txt
 58 64
 139 154
 ```
